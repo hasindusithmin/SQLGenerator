@@ -3,18 +3,16 @@ import json
 from generator import gen_sql
 from fastapi import FastAPI,HTTPException,Query
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 
 
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 @app.get('/')
 def root():
     raise HTTPException(status_code=200) 
-
-@app.get('/types')
-def get_types():
-    with open('static/types.json') as file:
-        return json.load(file)
     
 
 @app.get('/gensql/{table}')
