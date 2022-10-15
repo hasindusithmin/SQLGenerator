@@ -6,25 +6,20 @@ faker = Faker()
 def create_table(table,fields):
     sql = ''
     sql += f'CREATE TABLE {table} (\n'
-    sql += '\bid SERIAL PRIMARY KEY'
+    sql += '\tid SERIAL PRIMARY KEY,\n'
+    i = 0
     for field in fields:
-        value = eval(f'type(faker.{field}())')
-        dtype = 'INT' if value == int else 'VARCHAR(255)' if value == str else ''
-        sql += f'\b{field} '
-    return
+        cmd = f'type(faker.{field}())'
+        value = eval(cmd)
+        if value not in [list,set,tuple]:
+            dtype = 'INT' if value == int else 'VARCHAR(255)' if value == str else 'FLOAT'
+            sql += f'\t{field} {dtype}\n' if len(fields) -1 == i else f'\t{field} {dtype},\n'
+        i += 1
+    sql += ');\n'
+    return sql
 
 def generator(table,qty,fields):
     pass
 
-with open('static/types.json') as file:
-    types =  json.load(file)
-    values = []
-    for type_ in types:
-        cmd = f'type(faker.{type_}())'
-        try:
-            val = eval(cmd)
-        except:
-            print('err',type_)
-    #     value = eval(f'type(faker.{type_}())')
-    #     values.append(value)
-    # print(set(values))
+sql = create_table('demo',['name','unix_time','pyfloat'])
+print(sql)
