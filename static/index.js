@@ -3,11 +3,13 @@ window.addEventListener('DOMContentLoaded', async(event) => {
     console.log('DOM fully loaded and parsed');
     const res = await fetch('/static/types.json')
     const data = await res.json()
+    const auto = Object.keys(data)
+    auto.sort((a, b) => a.length - b.length);
     const autoCompleteJS = new autoComplete({
         selector: "#autoComplete",
         placeHolder: "Search for columns...",
         data: {
-            src: Object.keys(data),
+            src: auto,
             cache: true,
         },
         resultItem: {
