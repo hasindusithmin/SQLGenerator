@@ -33,8 +33,13 @@ document.getElementById('add').onclick = ()=>{
     if (column != '') {
         values.push(column);
     }
-    document.getElementById('autoComplete').value = ''
-    console.log(values)
+    document.getElementById('autoComplete').value = '';
+    const arr = [...new Set(values)]
+    let txt = ''
+    arr.forEach(column=>{
+        txt += `${column}, `
+    })
+    document.getElementById('columns').innerHTML = txt;
 }
 
 document.getElementById('generate').onclick = ()=>{
