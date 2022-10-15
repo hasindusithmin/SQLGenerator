@@ -1,5 +1,4 @@
 import json
-from io import BytesIO
 from faker import Faker
 
 faker = Faker()
@@ -38,11 +37,4 @@ def gen_sql(table,qty,fields):
         sql += insert_into(table,fields)
     return sql
 
-sql = gen_sql('demo',5,['name','unix_time','pyfloat'])
-
-with BytesIO() as file:
-    file.write(
-        str.encode(sql)
-    )
-    file.seek(0)
 
