@@ -18,15 +18,23 @@ def create_table(table,fields):
     sql += ');\n'
     return sql
 
-def insert_into(table,fields):
+def insert_into(table,fields_):
+    fields = []
+    for field in fields_:
+        cmd = f'faker.{field}()'
+        value = eval(cmd)
+        dtype = type(value)
+        if dtype not in [set,list,tuple]:
+            fields.append(field)
     sql = f'INSERT INTO {table} {tuple(fields)} VALUES ('
     i = 0
     for field in fields:
         cmd = f'faker.{field}()'
         value = eval(cmd)
         value =  f"'{value}'" if type(value) == str else value
-        sql += f'{value});\n' if len(fields) -1 == i else f'{value},'
+        sql += f'{value}' if len(fields) -1 == i else f'{value},'
         i += 1
+    sql += ');\n'
     return sql
 
 
