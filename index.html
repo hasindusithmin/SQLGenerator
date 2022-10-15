@@ -8,8 +8,38 @@
     <link rel="stylesheet" href="/static/w3.css">
     <link rel="stylesheet" href="/static/autoComplete.min.css">
     <script src="/static/autoComplete.min.js"></script>
+    <style>
+        body,h1 {font-family: "Raleway", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+          background-image: url('/static/sql.jpg');
+          min-height: 100%;
+          background-position: center;
+          background-size: cover;
+        }
+    </style>
 </head>
 <body>
+    <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+        <div class="w3-display-topleft w3-padding-large w3-xlarge">
+          SQLGenerator
+        </div>
+        <div class="w3-display-middle">
+            <p class="w3-large w3-center">No columns</p>
+            <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1">
+            <div class="w3-center w3-padding">
+                <button class="w3-button w3-large w3-round" id="add">Add</button>
+            </div>
+            <hr class="w3-border-grey">
+            <input type="text" placeholder="Table name" class="w3-input w3-round" id="table">
+            <hr class="w3-border-grey">
+            <input type="number" placeholder="Quantity" class="w3-input w3-round" id="qty">
+            <hr class="w3-border-grey">
+            <div class="w3-center">
+                <button class="w3-button w3-large w3-round" id="generate">Generate</button>
+            </div>
+        </div>
+      </div>
     <script src="/static/index.js"></script>
 </body>
 </html>
