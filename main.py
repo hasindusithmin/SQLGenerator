@@ -2,7 +2,7 @@ import io
 import json
 from generator import gen_sql
 from fastapi import FastAPI,HTTPException,Query
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse,FileResponse
 from fastapi.staticfiles import StaticFiles
 
 
@@ -12,7 +12,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get('/')
 def root():
-    raise HTTPException(status_code=200) 
+    return FileResponse('index.html')
     
 
 @app.get('/gensql/{table}')
